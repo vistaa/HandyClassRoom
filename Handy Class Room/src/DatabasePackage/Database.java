@@ -54,10 +54,23 @@ public class Database {
         while(res.next()){
             data.add(res);
         }
+        this.conn.close();
         return data;
         }catch(Exception e){
             data=null;
+           
             return data;
+        }
+        
+        
+    }
+    
+    public boolean execute(String sql){
+        try{
+            this.stmt.executeUpdate(sql);
+            return true;
+        }catch(Exception e){
+            return false;
         }
     }
 }
