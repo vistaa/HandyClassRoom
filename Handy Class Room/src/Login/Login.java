@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package Login;
+
+import java.util.*;
+
 import DatabasePackage.*;
+import Users.*;
 /**
  *
  * @author Xeron
@@ -12,22 +16,36 @@ import DatabasePackage.*;
 public class Login {
     public String email;
     public String password;
-    public DataClass dataClass;
+    public DataClass db;
+    public UserClass userClass;
     public Login(){
         //empty constructor
         this.email=null;
         this.password=null;
-        this.dataClass=new DataClass();
+        this.db=new DataClass();
     }
     
     public int checkValidation(){
         if(this.email.isEmpty() || this.password.isEmpty()){
         return 0;
         }
-        else if(this.dataClass.validation(this.email, this.password)){
-            return 1;
+        else{
+            String sql="select * from users where email=\'"+this.email+"\' and password=\'"+this.password+"\'";
+            this.db.createConnection();
+            
+            UserClass user=this.db.UserData(sql);
+            
+            if(user!=null){
+               this.userClass=new UserClass();
+                this.userClass=user;
+                return 1;
+            }
+            else{
+                return 2;
+            }
+            
+            
         }
-        else
-            return 2;
+        
     }
 }

@@ -5,13 +5,15 @@
  */
 package Login;
 import javax.swing.*;
-
+import Users.Student.*;
+import Users.Teacher.*;
 /**
  *
  * @author Xeron
  */
 public class LoginForm extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form LoginForm
      */
@@ -39,17 +41,15 @@ public class LoginForm extends javax.swing.JFrame {
     private void initComponents() {
 
         emailField = new javax.swing.JTextField();
-        passField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        passField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         emailField.setName("email"); // NOI18N
-
-        passField.setName("password"); // NOI18N
 
         loginButton.setText("Log In");
         loginButton.setName("login"); // NOI18N
@@ -76,13 +76,12 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(emailField)
-                                .addComponent(passField)
-                                .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))))
+                            .addComponent(emailField)
+                            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(passField)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addComponent(jLabel3)))
@@ -101,13 +100,12 @@ public class LoginForm extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(loginButton)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         emailField.getAccessibleContext().setAccessibleName("email");
-        passField.getAccessibleContext().setAccessibleName("password");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,8 +113,8 @@ public class LoginForm extends javax.swing.JFrame {
     private void loginButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonClicked
           // TODO add your handling code here:
         this.loginClass.email=emailField.getText();
-        this.loginClass.password=passField.getText();
-        
+        char[] pass=passField.getPassword();
+        this.loginClass.password=new String(pass);
        
         int x=this.loginClass.checkValidation();
         if(x==0){
@@ -126,7 +124,19 @@ public class LoginForm extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(this, "Wrong Email or Password");
         }
         else{
-            JOptionPane.showMessageDialog(this, "Login SuccessFul");
+             JOptionPane.showMessageDialog(this, "Login SuccessFul");
+            if(this.loginClass.userClass.role.equalsIgnoreCase("teacher")){
+               JOptionPane.showMessageDialog(this, "Teacher");
+               TeacherClass teacher=new TeacherClass();
+               teacher.email=this.loginClass.userClass.email;
+               teacher.userId=this.loginClass.userClass.userId;
+              
+               new TeacherGUI(teacher).setVisible(true);
+               this.setVisible(false);
+            }else if(this.loginClass.userClass.role.equalsIgnoreCase("student")){
+                JOptionPane.showMessageDialog(this, "Student");
+            }
+           
         }
         
         
@@ -143,6 +153,6 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     public javax.swing.JButton loginButton;
-    public javax.swing.JTextField passField;
+    public javax.swing.JPasswordField passField;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,15 +46,13 @@ public class Database {
      
     }
     
-    public List<Object>getData(String sql){
-        
-        List<Object>data=new ArrayList<Object>();
+    public ResultSet getData(String sql){
+        this.createConnection();
+        ResultSet data;
+       
         try{
-        ResultSet res= this.stmt.executeQuery(sql);
-        while(res.next()){
-            data.add(res);
-        }
-        this.conn.close();
+       data= this.stmt.executeQuery(sql);
+ 
         return data;
         }catch(Exception e){
             data=null;
