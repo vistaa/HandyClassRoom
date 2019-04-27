@@ -31,7 +31,7 @@ public class Login {
         }
         else{
             String sql="select * from users where email=\'"+this.email+"\' and password=\'"+this.password+"\'";
-            this.db.createConnection();
+           // this.db.createConnection();
             
             UserClass user=this.db.UserData(sql);
             

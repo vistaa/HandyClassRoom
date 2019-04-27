@@ -105,6 +105,11 @@ public class TeacherGUI extends javax.swing.JFrame {
                 classesNameChange(evt);
             }
         });
+        classes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                classesActionPerformed(evt);
+            }
+        });
 
         sections.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -202,6 +207,10 @@ public class TeacherGUI extends javax.swing.JFrame {
        this.firstTime=false;
        
     }//GEN-LAST:event_classesNameChange
+
+    private void classesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_classesActionPerformed
 
     /**
      * @param args the command line arguments

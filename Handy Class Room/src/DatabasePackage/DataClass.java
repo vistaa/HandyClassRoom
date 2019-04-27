@@ -105,9 +105,16 @@ public class DataClass extends Database{
                
            }
            return null;
-           }
+         
        
-  }
+//       public List<String> getSchedule(int sid){
+//           
+//           String sql="select * from schedule where "
+//           return null;
+//       }
+       
+       }
+}
     
  
 
