@@ -79,7 +79,7 @@ public class TeacherGUI extends javax.swing.JFrame {
         userName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         userName.setText("User name");
 
-        email.setText("jLabel1");
+        email.setText("Teacher");
 
         jLabel1.setText("Course Taken: ");
 
